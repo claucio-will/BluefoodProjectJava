@@ -15,6 +15,14 @@ public class ClientService {
         if (!validateEmail(client.getEmail(), client.getId())){
             throw new ValidationException("Email já existe.");
         }
+
+        if (client.getId() != null){ //Cliente já existente
+            Client clientDB = clientRepository.findById(client.getId()).orElseThrow();
+            client.setPassword(clientDB.getPassword());
+
+        }else {
+            client.encryptPassword(); //Novo cliente
+        }
         clientRepository.save(client);
     }
 

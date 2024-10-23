@@ -1,6 +1,7 @@
 package com.claucio.bluefood.domain.user;
 
 
+import com.claucio.bluefood.util.StringUtils;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -40,4 +41,9 @@ public class User implements Serializable {
     @Pattern(regexp = "[0-9]{10,11}", message = "Telefone possui formato inválido")
     @Column(length = 11, nullable = false)
     private String phone;
+
+
+    public void encryptPassword(){
+        this.password = StringUtils.encrypt(this.password);
+    }
 }
