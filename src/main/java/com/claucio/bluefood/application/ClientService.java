@@ -11,10 +11,23 @@ public class ClientService {
     @Autowired
     private ClientRepository clientRepository;
 
-    public void saveClient(Client client){
+    public void saveClient(Client client) throws ValidationException{
+        if (!validateEmail(client.getEmail(), client.getId())){
+            throw new ValidationException("Email já existe.");
+        }
         clientRepository.save(client);
     }
 
-
-
+    private boolean validateEmail(String email, Integer id){
+        Client client = clientRepository.findByEmail(email);
+        if (client != null){
+            if (id == null){
+                return false;
+            }
+           if (!client.getId().equals(id)){
+               return false;
+           }
+        }
+        return true;
+    }
 }

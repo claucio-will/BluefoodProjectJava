@@ -37,10 +37,18 @@ img#imgIconeUsuario {
 
 h1 {
   color: #1e9bde;
-  font-size: 24px;
+  background-color: #eeeeee;
   text-transform: uppercase;
   font-style: italic;
-  margin: 20px auto;
+  font-size: 20px;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 10px solid #1e9bde;
+  border-right: 10px solid #1e9bde;
+  border-top: 2px solid #1e9bde;
+  border-bottom: 2px solid #1e9bde;
+  border-radius: 30px;
 }
 
 div#mensagemDeErro, div#mensagemDeSucesso {
