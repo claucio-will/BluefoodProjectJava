@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}"> <!-- Essa tag pega o nome do arquivo base que ? 'layout' -->
+
+<body>
+<div layout:fragment="content">
+    <div>
+        <h1>Cadastro de Restaurante</h1>
+        <div id="mensagemDeSucesso" th:if="${msg != null}">
+            <span th:text="${msg}"></span>
+        </div>
+        <br>
+        <form method="post" th:object="${restaurante}" th:action="${!editMode} ? @{/public/restaurante/save} : @{/prestaurante/save} " enctype="multipart/form-data">
+            <fieldset>
+                <input type="hidden" th:field="*{id}">
+                <label for="nome">Nome do Restaurante: </label><br>
+                <input type="text" id="nome" name="nome" placeholder="Nome" th:field="*{name}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('name')}">
+                    <span th:errors="*{name}"></span>
+                </div>
+
+                <label for="cnpj">CNPJ: </label><br>
+                <input type="text" id="cnpj" name="cnpj" placeholder="CNPJ" th:field="*{cnpj}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('cnpj')}">
+                    <span th:errors="*{cnpj}"></span>
+                </div>
+
+                <label for="email">E-mail: </label><br>
+                <input type="text" id="email" name="email" placeholder="E-mail" th:field="*{email}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('email')}">
+                    <span th:errors="*{email}"></span>
+                </div>
+
+                <label for="telefone">Telefone: </label><br>
+                <input type="text" id="telefone" name="telefone" placeholder="Telefone" th:field="*{phone}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('phone')}">
+                    <span th:errors="*{phone}"></span>
+                </div>
+
+                <label for="telefone">Taxa de entrega: </label><br>
+                <input type="number" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de entrega" th:field="*{taxaEntrega}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('taxaEntrega')}">
+                    <span th:errors="*{taxaEntrega}"></span>
+                </div>
+
+                <label for="telefone">Tempo de entrega(min): </label><br>
+                <input type="number" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Taxa minima" th:field="*{tempoEntregaBase}"><br><br>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('tempoEntregaBase')}">
+                    <span th:errors="*{tempoEntregaBase}"></span>
+                </div>
+
+                <label for="categoria">Categoria de comida: </label><br>
+                <select name="categoria" id="categoria" multiple="multiple" th:field="*{categorias}"
+                        style="heigth: 300px;">
+                    <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.name}">
+
+                    </option>
+                </select>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('categorias')}">
+                    <span th:errors="*{categorias}"></span>
+                </div>
+                <br/>
+
+                <label for="logotipo">Logotipo: </label><br>
+                <input type="file" id="logotipo" name="logotipo" placeholder="Selecionar"
+                       th:field="*{logotipoFile}"><br><br>
+
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('logotipo')}">
+                    <span th:errors="*{logotipo}"></span>
+                </div>
+
+                <div th:if="${!editMode}">
+                    <label for="senha">Senha: </label><br>
+                    <input type="password" id="senha" name="senha" placeholder="Senha" th:field="*{password}"><br><br>
+                    <div id="mensagemDeErro" th:if="${#fields.hasErrors('password')}">
+                        <span th:errors="*{password}"></span>
+                    </div>
+                </div>
+            </fieldset>
+            <br/>
+            <div class=".divBotoes">
+                <input type="submit" th:value="${!editMode} ? Cadastrar : Alterar">
+                <input type="button" value="Voltar" onClick="location.href='index.html';">
+            </div>
+        </form>
+        <br>
+
+
+    </div>
+</body>
+</html>
+

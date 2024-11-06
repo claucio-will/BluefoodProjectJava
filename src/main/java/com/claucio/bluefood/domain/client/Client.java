@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
-@Entity(name = "Clientes")
+@Entity(name = "clientes")
 public class Client extends User implements Serializable {
 
     @NotBlank(message = "Cpf não pode ser vazio")
