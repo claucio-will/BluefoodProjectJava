@@ -1,6 +1,7 @@
 package com.claucio.bluefood.domain.restaurante;
 
 import com.claucio.bluefood.domain.user.User;
+import com.claucio.bluefood.util.FileType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.EqualsAndHashCode;
@@ -47,12 +48,12 @@ public class Restaurante extends User {
     private Set<CategoryRestaurante> categorias = new HashSet<>(0);
 
 
-    public void setLogotipoFileName(){
-      if (getId() == null){
-          throw new IllegalArgumentException("É preciso primeiro gravar o registro");
-      }
-      //TODO: trocar forma de ler extenção
-      this.logotipo = String.format("%04d-lgo.%s", getId(), ".png");
+    public void setLogotipoFileName() {
+        if (getId() == null) {
+            throw new IllegalArgumentException("É preciso primeiro gravar o registro");
+        }
+
+        this.logotipo = String.format("%04d-logo.%s", getId(), FileType.of(logotipoFile.getContentType()).getExtension());
     }
 
 }
