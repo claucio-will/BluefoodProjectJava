@@ -1,6 +1,7 @@
 package com.claucio.bluefood.domain.restaurante;
 
 import com.claucio.bluefood.domain.user.User;
+import com.claucio.bluefood.infrastructure.web.validator.UploadConstraint;
 import com.claucio.bluefood.util.FileType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -27,6 +28,7 @@ public class Restaurante extends User {
     @Size(max = 80)
     private String logotipo;
 
+    @UploadConstraint(acceptedTypes = FileType.PNG)
     private transient MultipartFile logotipoFile;
 
     @NotNull(message = "A taxa de entrega não pode ser vázia")

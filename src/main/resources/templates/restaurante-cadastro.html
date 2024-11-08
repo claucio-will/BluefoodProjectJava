@@ -68,8 +68,8 @@
                 <input type="file" id="logotipo" name="logotipo" placeholder="Selecionar"
                        th:field="*{logotipoFile}"><br><br>
 
-                <div id="mensagemDeErro" th:if="${#fields.hasErrors('logotipo')}">
-                    <span th:errors="*{logotipo}"></span>
+                <div id="mensagemDeErro" th:if="${#fields.hasErrors('logotipoFile')}">
+                    <span th:errors="*{logotipoFile}"></span>
                 </div>
 
                 <div th:if="${!editMode}">
