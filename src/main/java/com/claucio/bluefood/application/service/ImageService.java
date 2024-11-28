@@ -1,4 +1,4 @@
-package com.claucio.bluefood.application;
+package com.claucio.bluefood.application.service;
 
 import com.claucio.bluefood.util.IOUtils;
 import org.springframework.beans.factory.annotation.Value;

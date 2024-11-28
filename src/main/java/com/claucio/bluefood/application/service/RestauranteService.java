@@ -1,8 +1,10 @@
-package com.claucio.bluefood.application;
+package com.claucio.bluefood.application.service;
 
 import com.claucio.bluefood.domain.client.Client;
+import com.claucio.bluefood.domain.client.ClientRepository;
 import com.claucio.bluefood.domain.restaurante.Restaurante;
 import com.claucio.bluefood.domain.restaurante.RestauranteRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,12 @@ public class RestauranteService {
     private RestauranteRepository restauranteRepository;
 
     @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
     private ImageService imageService;
 
+    @Transactional
     public void saveRestaurante(Restaurante restaurante) throws ValidationException {
         if (!validateEmail(restaurante.getEmail(), restaurante.getId())) {
             throw new ValidationException("Email já existe.");
@@ -34,12 +40,17 @@ public class RestauranteService {
     }
 
     private boolean validateEmail(String email, Integer id) {
-        Restaurante client = restauranteRepository.findByEmail(email);
-        if (client != null) {
+        Client client = clientRepository.findByEmail(email);
+
+        if (client != null){
+            return false;
+        }
+        Restaurante restaurante = restauranteRepository.findByEmail(email);
+        if (restaurante != null) {
             if (id == null) {
                 return false;
             }
-            if (!client.getId().equals(id)) {
+            if (!restaurante.getId().equals(id)) {
                 return false;
             }
         }

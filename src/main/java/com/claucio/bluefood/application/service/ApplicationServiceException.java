@@ -1,4 +1,4 @@
-package com.claucio.bluefood.application;
+package com.claucio.bluefood.application.service;
 
 public class ApplicationServiceException extends RuntimeException{
     public ApplicationServiceException(String message) {

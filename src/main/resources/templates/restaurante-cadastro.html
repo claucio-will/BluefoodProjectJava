@@ -13,7 +13,9 @@
             <span th:text="${msg}"></span>
         </div>
         <br>
-        <form method="post" th:object="${restaurante}" th:action="${!editMode} ? @{/public/restaurante/save} : @{/prestaurante/save} " enctype="multipart/form-data">
+        <form method="post" th:object="${restaurante}"
+              th:action="${!editMode} ? @{/public/restaurante/save} : @{/prestaurante/save} "
+              enctype="multipart/form-data">
             <fieldset>
                 <input type="hidden" th:field="*{id}">
                 <label for="nome">Nome do Restaurante: </label><br>
@@ -41,13 +43,15 @@
                 </div>
 
                 <label for="telefone">Taxa de entrega: </label><br>
-                <input type="number" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de entrega" th:field="*{taxaEntrega}"><br><br>
+                <input type="number" id="taxaEntrega" name="taxaEntrega" placeholder="Taxa de entrega"
+                       th:field="*{taxaEntrega}"><br><br>
                 <div id="mensagemDeErro" th:if="${#fields.hasErrors('taxaEntrega')}">
                     <span th:errors="*{taxaEntrega}"></span>
                 </div>
 
                 <label for="telefone">Tempo de entrega(min): </label><br>
-                <input type="number" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Taxa minima" th:field="*{tempoEntregaBase}"><br><br>
+                <input type="number" id="tempoEntregaBase" name="tempoEntregaBase" placeholder="Taxa minima"
+                       th:field="*{tempoEntregaBase}"><br><br>
                 <div id="mensagemDeErro" th:if="${#fields.hasErrors('tempoEntregaBase')}">
                     <span th:errors="*{tempoEntregaBase}"></span>
                 </div>
@@ -56,7 +60,6 @@
                 <select name="categoria" id="categoria" multiple="multiple" th:field="*{categorias}"
                         style="heigth: 300px;">
                     <option th:each="categoria : ${categorias}" th:value="${categoria.id}" th:text="${categoria.name}">
-
                     </option>
                 </select>
                 <div id="mensagemDeErro" th:if="${#fields.hasErrors('categorias')}">
@@ -83,7 +86,7 @@
             <br/>
             <div class=".divBotoes">
                 <input type="submit" th:value="${!editMode} ? Cadastrar : Alterar">
-                <input type="button" value="Voltar" onClick="location.href='index.html';">
+                <input type="button" value="Voltar" th:onClick="'location.href=\'' + @{/restaurante/home} + '\';'">
             </div>
         </form>
         <br>

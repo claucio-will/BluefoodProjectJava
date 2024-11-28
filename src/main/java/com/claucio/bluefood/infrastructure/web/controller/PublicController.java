@@ -1,8 +1,8 @@
 package com.claucio.bluefood.infrastructure.web.controller;
 
-import com.claucio.bluefood.application.ClientService;
-import com.claucio.bluefood.application.RestauranteService;
-import com.claucio.bluefood.application.ValidationException;
+import com.claucio.bluefood.application.service.ClientService;
+import com.claucio.bluefood.application.service.RestauranteService;
+import com.claucio.bluefood.application.service.ValidationException;
 import com.claucio.bluefood.domain.client.Client;
 import com.claucio.bluefood.domain.restaurante.CategoriaRestauranteRepository;
 import com.claucio.bluefood.domain.restaurante.Restaurante;
@@ -58,6 +58,7 @@ public class PublicController {
     public String newRestaurante(Model model) {
         model.addAttribute("restaurante", new Restaurante());
         ControllerHelper.setEditMode(model, false);
+
         ControllerHelper.addCategoriasToResquest(categoriaRestauranteRepository,model);
         return "restaurante-cadastro";
     }
@@ -73,6 +74,7 @@ public class PublicController {
             }
         }
         ControllerHelper.setEditMode(model, false);
+        ControllerHelper.addCategoriasToResquest(categoriaRestauranteRepository, model);
         return "restaurante-cadastro";
     }
 
